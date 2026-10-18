@@ -1,0 +1,51 @@
+plugins {
+	id 'fabric-loom' version '1.7.+'
+	id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = "auctionmod"
+version = "1.0.0"
+group = "com.axiom"
+
+repositories {
+	mavenCentral()
+	maven { url = "https://maven.fabricmc.net/" }
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:1.21.1"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:0.15.11"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.100.0+1.21.1"
+}
+
+processResources {
+	inputs.property "version", project.version
+	filteringCharset "UTF-8"
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = "UTF-8"
+	options.release = 17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${archivesBaseName}"}
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}

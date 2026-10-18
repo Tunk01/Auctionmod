@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "auctionmod",
+  "version": "${version}",
+  "name": "Auction Mod",
+  "description": "Stream auction system for Donut SMP",
+  "authors": ["Axiom"],
+  "contact": {},
+  "license": "All rights reserved",
+  "environment": "client",
+  "entrypoints": {
+    "main": ["com.axiom.auctionmod.AuctionMod"],
+    "client": ["com.axiom.auctionmod.AuctionModClient"]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "1.21.1"
+  }
+}
